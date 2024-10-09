@@ -30,6 +30,7 @@ stacks:
 
 - heroku-20
 - heroku-22
+- heroku-24
 
 If you have problems on any of these stacks, or if a new stack comes out that is
 unsupported, please file an issue.

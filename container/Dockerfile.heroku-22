@@ -10,7 +10,7 @@ RUN apt-get update \
     wget \
     python3-pip \
     ninja-build \
-    pkg-config 
+    pkg-config
 
 RUN pip3 install meson
 
@@ -40,7 +40,7 @@ RUN apt-get install -y \
   libpoppler-glib-dev \
   libimagequant-dev \
   liborc-0.4-dev \
-  libgsf-1-dev \
+  libarchive-dev \
   libcgif-dev \
   libheif-dev
 
@@ -54,7 +54,7 @@ ARG PREFIX=/usr/local
 ENV PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
 # use libspng for PNG load and save
-ARG SPNG_VERSION=0.7.2
+ARG SPNG_VERSION=0.7.4
 ARG SPNG_URL=https://github.com/randy408/libspng/archive/refs/tags
 
 RUN wget ${SPNG_URL}/v${SPNG_VERSION}.tar.gz \
@@ -65,7 +65,7 @@ RUN wget ${SPNG_URL}/v${SPNG_VERSION}.tar.gz \
   && ninja \
   && ninja install
 
-ARG VIPS_VERSION=8.14.3
+ARG VIPS_VERSION=8.15.4
 ARG VIPS_URL=https://github.com/libvips/libvips/archive/refs/tags
 
 RUN wget ${VIPS_URL}/v${VIPS_VERSION}/v${VIPS_VERSION}.tar.gz \
@@ -82,7 +82,7 @@ RUN wget ${VIPS_URL}/v${VIPS_VERSION}/v${VIPS_VERSION}.tar.gz \
     # modules cause issues with loading heif files in ruby-vips \
 	  -Dmodules=disabled \
     # allows omitting gobject-introspection library \
-	  -Dintrospection=false \
+	  -Dintrospection=disabled \
 	&& cd build \
 	&& meson compile \
 	&& meson install
